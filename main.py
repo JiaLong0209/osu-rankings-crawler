@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import json
 from config import * 
 
 from flask import Flask, render_template, jsonify, request
@@ -18,25 +19,7 @@ can_run_server = True
 
 # table schema
 prefix_path = "schema/"
-osu_schema = prefix_path + "osu_schema.sql"
-taiko_schema = prefix_path + "taiko_schema.sql"
-mania_schema = prefix_path + "mania_schema.sql"
-catch_schema = prefix_path + "catch_schema.sql"
-
 table_name = "osu_country_rankings"
-
-country_rankings_entries = [
-     'ranking',
-     'country_name',
-     'active_users',
-     'play_count',
-     'avg_score',
-     'performance',
-     'avg_performance'
-]
-
-
-
 
 # Database
 def get_db():
@@ -72,22 +55,14 @@ def init():
 # Router
 @app.route("/")
 def index():
+    res = get_country_rankings_data()
+    data = res.get_json()
+    print(data)
+    return render_template("index.html", data=data)
 
-    # db = get_db()
-    # cursor = db.cursor()
-    # data = cursor.execute("SELECT * FROM country_rankings AS r").fetchall()
-    # t_data = [i for i in zip(*data)]
-    # dict_data = {key: list(t_data[i]) for i, key in enumerate(country_rankings_entries)}
-    # json_data = jsonify(dict_data)
-
-    # print(data)
-    # print(t_data)
-    # print(dict_data)
-    print(json_data)
-    
-    # colname = [ d[0] for d in users.description ]
-    # user_list = [ dict(zip(colname, r)) for r in users.fetchall() ]
-    return render_template("index.html")
+@app.route("/chart")
+def chart():
+    return render_template("chart.html")
 
 @app.route("/hello")
 def hello_world():
@@ -108,7 +83,7 @@ def get_country_rankings_data():
     cursor = db.cursor()
     data = cursor.execute(f"SELECT * FROM {table_name} AS r").fetchall()
     t_data = [i for i in zip(*data)]
-    dict_data = {key: list(t_data[i]) for i, key in enumerate(country_rankings_entries)}
+    dict_data = {key: list(t_data[i]) for i, key in enumerate(COUNTRY_RANKINGS_ENTRIES)}
     json_data = jsonify(dict_data)
 
     return json_data
@@ -120,4 +95,7 @@ if __name__  == "__main__":
         app.run(debug=True, port=8000)
 
 
+# @app.template_filter('reverse')
+# def reverse_filter(s):
+#     return s[::-1]
 

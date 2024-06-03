@@ -1,5 +1,26 @@
 *{
     padding: 0;
     margin: 0;
+    transition: 0.1s;
+}
+.rankings_table table {
+    width: 70%;
+    border-collapse: collapse;
 }
 
+.rankings_table th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.rankings_table th {
+    background-color: #f2f2f2;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    background: rgb(255, 255, 255);
+}

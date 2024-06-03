@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}osu country rankings{% endblock %}
+
+{% block page_content %}
+
+<div class="container">
+
+    <a href=" {{ url_for('index') }}">To home page.</a>
+
+    <div class="header">
+    </div>
+
+    <canvas id="myChart" style="width:90%"></canvas>
+
+</div>
+
+<script>
+
+    let data = {}
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        axios.get('/api/country_rankings')
+            .then((response) => {
+                data = response.data;
+                const tableBody = document.querySelector('.rankings_table tbody');
+
+                for (let i in data) {
+                    console.log(i, data[i])
+                }
+                const ctx = document.getElementById('myChart');
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data['country_name'],
+                        datasets: [{
+                            label: 'users',
+                            data: data['active_users'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            })
+            .catch((error) => {
+                console.error('Error fetching the data', error);
+            });
+    });
+
+
+</script>
+
+<!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        axios.get('/api/country_rankings')
+            .then( (response) => {
+                const data = response.data;
+                const tableBody = document.querySelector('.rankings_table tbody');
+                const tableHead = document.querySelector('.rankings_table thead');
+                for (let i in data){
+                    console.log(i, data[i])
+                }
+            
+                for (let key of countryRankingsEntries){
+                        const row = document.createElement('tr');
+
+                        for(let value of data[key]){
+                            const cell = document.createElement('td');
+                            cell.textContent = value;
+                        }
+
+                        row.appendChild(cell);
+
+                    tableBody.appendChild(row);
+
+                }
+            })
+            .catch( (error) => {
+                console.error('Error fetching the data', error);
+            });
+    });
+</script> -->
+
+{% endblock %}

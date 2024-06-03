@@ -1,6 +1,23 @@
-# osu rankings scraper
+# osu rankings crawler
 
-This is osu rakings scraper.
+This is an osu rakings crawler.
+
+
+## Run
+
+
+```bash
+# Remove previous database and create new one.
+python init_db.py
+
+# Crawl all of the rankings
+python crawl_all.py
+
+# Run server
+python main.py
+```
+
+
 
 ## Reference
 
@@ -14,3 +31,6 @@ This is osu rakings scraper.
 * https://hackmd.io/@shaoeChen/rJnJWaq1z?type=view
 * https://hackmd.io/@shaoeChen/B1Fg-6j-z?type=view
 * https://ithelp.ithome.com.tw/articles/10264625
+
+### Ajax
+* https://www.eudora.cc/posts/26119
