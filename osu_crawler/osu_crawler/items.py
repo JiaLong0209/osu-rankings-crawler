@@ -17,5 +17,6 @@ class OsuCrawlerItem(scrapy.Item):
     avg_score = scrapy.Field()
     performance = scrapy.Field()
     avg_performance = scrapy.Field()
+    mode = scrapy.Field()
 
 

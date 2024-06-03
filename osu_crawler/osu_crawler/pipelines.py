@@ -9,8 +9,7 @@
 from itemadapter import ItemAdapter
 import sqlite3
 from utility import *
-
-import config
+from config import *
 
 
 prefix_path = "../"
@@ -21,14 +20,11 @@ class OsuCrawlerPipeline:
     def open_spider(self, spider):
         self.conn = sqlite3.connect(prefix_path + db_path)
         self.cursor = self.conn.cursor()
-        self.mode = config.CURRENT_MODE
-        self.table_name = config.TABLES[self.mode]
-        self.schema = "schema/" + config.SCHEMAS[self.mode]
-        print("~" * 50)
-        print(f"\n\n\n\nmode: {self.mode}")
+        self.mode = ""
+        # schema = "schema/" + SCHEMAS[mode]
 
         # create table
-        # with open(self.shcema) as f:
+        # with open(shcema) as f:
         #     exe = f.read()
         #     self.conn.executescript(exe)
         # self.conn.commit()
@@ -36,14 +32,19 @@ class OsuCrawlerPipeline:
 
     def close_spider(self, spider):
         self.conn.commit()
-        print(f"Item commit to {config.DATABASE}")
+        print(f"Item commit to {DATABASE}")
         self.conn.close()
 
     def process_item(self, item, spider):
+        self.mode = item['mode']
+        table_name = TABLES[self.mode]
                 
+        print("~" * 50)
+        print(f"\n\n\n\nmode: {self.mode}")
+
         for i in range(len(item['ranking'])):
             self.cursor.execute(f'''
-                INSERT OR REPLACE INTO {self.table_name} (ranking, country_name, active_users, play_count, avg_score, performance, avg_performance) 
+                INSERT OR REPLACE INTO {table_name} (ranking, country_name, active_users, play_count, avg_score, performance, avg_performance) 
                 VALUES (?, ?, ?, ?, ?, ?, ?)
             ''', (
                 int(item.get('ranking', None)[i]),

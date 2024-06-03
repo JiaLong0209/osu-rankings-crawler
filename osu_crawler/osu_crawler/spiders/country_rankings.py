@@ -5,6 +5,7 @@ from scrapy.spiders import CrawlSpider, Rule
 from osu_crawler.items import OsuCrawlerItem
 from utility.functions import *
 from config import *
+import re
 
 
 
@@ -12,7 +13,7 @@ class OsuCountrySpider(scrapy.Spider):
     name = "country_rankings"
     allowed_domains = ["osu.ppy.sh"]
     pages = [i for i in range(START_PAGE, END_PAGE+1)] # page 1~2
-    start_urls = [f"https://osu.ppy.sh/rankings/{CURRENT_MODE}/country?page={i}#scores" for i in pages] 
+    start_urls = [f"https://osu.ppy.sh/rankings/{mode}/country?page={i}#scores" for i in pages for mode in GAME_MODES] 
     # https://osu.ppy.sh/rankings/osu/country?page=1#scores
 
 
@@ -32,7 +33,11 @@ class OsuCountrySpider(scrapy.Spider):
 
         item['avg_performance'] = str_preprocess_in_list(sel.xpath('//*[@id="scores"]/div/table/tbody//td[8]/text()').extract())
 
-        # print_dict(item)
+
+        mode_match = re.search(r'rankings/(\w+)/country', response.url)
+        if mode_match:
+            item['mode'] = mode_match.group(1)
+
         return item
 
 # Xpath: 
