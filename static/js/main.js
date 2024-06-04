@@ -53,7 +53,7 @@ function getDataByValueScatter(data, valueX, valueY, sortData = false) {
      let arr_data_y = responseData[valueY];
      
      let arr_data = arr_data_x.map( (v,i) => { return {"x": v, "y": arr_data_y[i]} })
-     return arr_data
+     return {"labels": arr_labels, "data": arr_data}
      
 
      // let obj = arr_labels.map((v, i) => { return { "labels": v, "x": arr_data_x[i], "y": arr_data_y[i]} })

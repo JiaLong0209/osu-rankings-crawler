@@ -29,7 +29,7 @@
                         labels: sorted_data['labels'],
                         datasets: [{
                             label: "{{ mode }}",
-                            data: sorted_data,
+                            data: sorted_data['data'],
                             backgroundColor: [
                               'rgba(255, 99, 132, 0.2)',
                               'rgba(255, 159, 64, 0.2)',
@@ -49,6 +49,7 @@
                               'rgb(201, 203, 207)'
                             ],
                             borderWidth: 1,
+                            pointRadius: 8,
                         }]
                     },
                     options: {

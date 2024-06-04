@@ -78,11 +78,17 @@ def chart_pages(mode, entry):
                            entry=entry)
 
 @app.route("/<mode>/scatter")
-def scatter_pages(mode):
+def scatter_pages(mode, p_x = "", p_y = ""):
+
+    x = request.args.get("x", p_x if p_x else "play_count")
+    y = request.args.get("y", p_y if p_y else "avg_performance")
+    print(f"x: {x}")
+    print(f"y: {y}")
+
     return render_template(f"base_chart_scatter.html", mode = mode,
                            data=get_country_rankings_json_data(mode, 500),
-                           x="play_count",
-                           y="avg_performance",
+                           x=x,
+                           y=y,
                            COUNTRY_RANKINGS_ENTRIES=COUNTRY_RANKINGS_ENTRIES)
                            
 
