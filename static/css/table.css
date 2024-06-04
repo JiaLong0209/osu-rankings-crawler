@@ -24,11 +24,6 @@
 }
 
 
-/* .rankings_table th:nth-child(2n) {
-    background-color: #ffdddd;
-} */
-
-
 .rankings_table table tr:first-child td{
     text-align: center;
     border-bottom: var(--normal-border);

@@ -126,13 +126,7 @@ def get_country_rankings_json_data(p_mode = "", p_length = ""):
 # Filters
 @app.template_filter('pascal_case')
 def to_pascal_case(snake_str):
-    return ''.join(word.capitalize() for word in snake_str.split('_'))
-
-@app.template_filter('pascal_case_spaces')
-def to_pascal_case_spaces(snake_str):
-    return ' '.join(word.capitalize() for word in snake_str.split('_'))
-
-
+    return f"{' ' if len(snake_str.split('_')) > 1 else '' }".join(word.capitalize() for word in snake_str.split('_'))
 
 if __name__  == "__main__":
     init()

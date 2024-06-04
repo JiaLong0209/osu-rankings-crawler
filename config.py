@@ -24,6 +24,10 @@ COUNTRY_RANKINGS_ENTRIES = [
      'avg_performance'
 ]
 
+PAGE_TITLES = ['']
+
 
 def change_current_mode(mode):
     CURRENT_MODE = mode
+
+
