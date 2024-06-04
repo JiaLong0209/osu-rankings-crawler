@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}{{ mode | pascal_case }} Country Rankings Table{% endblock %}
+
+{% block nav_title %}{{ mode | pascal_case }} Country Rankings Table{% endblock %}
+
+{% block page_content %}
+
+    <table id ="{{ mode }}_rankings_table" class="rankings_table">
+      <!-- <caption>{{ mode }} country rankings</caption> -->
+        <thead>
+            <tr>
+                {% for key in COUNTRY_RANKINGS_ENTRIES %}
+                <th>{{ key }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for row in range(data['ranking']|length) %}
+            <tr>
+                {% for key in COUNTRY_RANKINGS_ENTRIES %}
+                <td>{{ data[key][row] }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+
+</div>
+
+<script>
+        $(document).ready(function () {
+            let table = $('.rankings_table').DataTable(dataTableConfig).draw();
+            
+        });
+</script>
+{% endblock %}
+

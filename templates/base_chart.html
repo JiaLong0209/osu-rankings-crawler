@@ -1,23 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}osu country rankings{% endblock %}
+{% block title %}{{ mode | pascal_case}} Country Rankings - {{ entry | pascal_case_spaces}}{% endblock %}
+
+{% block nav_title %}{{ mode | pascal_case}} Country Rankings - {{ entry | pascal_case_spaces}}{% endblock %}
 
 {% block page_content %}
 
 
-<!-- <h2>Taiko Active Users Rankings</h2> -->
-
 <canvas id="myChart"></canvas>
-
 
 <script>
 
     let responseData = {}
     document.addEventListener('DOMContentLoaded', function () {
-        axios.get('/api/country_rankings')
+        axios.get('/api/country_rankings?mode={{ mode }}')
             .then((response) => {
 
-                let sorted_data = getDataByValue(response.data, "active_users", true)
+                let sorted_data = getDataByValue(response.data, "{{ entry }}", true)
                 console.log(sorted_data)
 
                 const tableBody = document.querySelector('.rankings_table tbody');
@@ -28,7 +27,7 @@
                     data: {
                         labels: sorted_data['labels'],
                         datasets: [{
-                            label: 'users',
+                            label: "{{ entry }}",
                             data: sorted_data['data'],
                             backgroundColor: [
                               'rgba(255, 99, 132, 0.2)',

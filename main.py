@@ -12,7 +12,8 @@ from flask import g
 # print(f"{GAME_MODES}")
 # print(SCHEMAS)
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
+
 DATABASE = "osu.db"
 reset_db = False
 can_run_server = True
@@ -55,24 +56,42 @@ def init():
 # Router
 @app.route("/")
 def index():
-    res = get_country_rankings_data()
-    data = res.get_json()
-    print(data)
-    return render_template("index.html", data=data)
+    return render_template("index.html", data=get_country_rankings_json_data('taiko', 500),
+                           COUNTRY_RANKINGS_ENTRIES=COUNTRY_RANKINGS_ENTRIES)
 
 @app.route("/chart")
 def chart():
     return render_template("chart.html")
 
-@app.route("/hello")
-def hello_world():
-    return render_template("hello.html")
+@app.route("/<mode>")
+def table_pages(mode):
+    return render_template(f"base_table.html", mode = mode,
+                           data=get_country_rankings_json_data(mode, 500),
+                           COUNTRY_RANKINGS_ENTRIES=COUNTRY_RANKINGS_ENTRIES)
+
+@app.route("/<mode>/<entry>")
+def chart_pages(mode, entry):
+    return render_template(f"base_chart.html", mode = mode,
+                           data=get_country_rankings_json_data(mode, 500),
+                           COUNTRY_RANKINGS_ENTRIES=COUNTRY_RANKINGS_ENTRIES,
+                           entry=entry)
+
 
 
 @app.route("/api/country_rankings", methods = ["GET"])
-def get_country_rankings_data():
-    mode = request.args.get("mode", "osu") 
+def get_country_rankings_data(p_mode = "", p_length = ""):
+
+    mode = request.args.get("mode", p_mode if p_mode else "osu")
+    length = request.args.get("length", p_length if p_length else "50")
+
     print(f"Game mode: {mode}")
+    print(f"Length : {length}")
+
+    try:
+        print(type(int(length)))
+        length = int(length)
+    except ValueError:
+        return jsonify({"error": "Invalid length parameter"}), 400
 
     if mode in GAME_MODES:
         table_name = TABLES[mode]
@@ -83,10 +102,25 @@ def get_country_rankings_data():
     cursor = db.cursor()
     data = cursor.execute(f"SELECT * FROM {table_name} AS r").fetchall()
     t_data = [i for i in zip(*data)]
-    dict_data = {key: list(t_data[i]) for i, key in enumerate(COUNTRY_RANKINGS_ENTRIES)}
+    dict_data = {key: list(t_data[i])[:length] for i, key in enumerate(COUNTRY_RANKINGS_ENTRIES)}
     json_data = jsonify(dict_data)
 
     return json_data
+
+def get_country_rankings_json_data(p_mode = "", p_length = ""):
+    res = get_country_rankings_data(p_mode, p_length)
+    data = res.get_json()
+    return data
+
+# Filters
+@app.template_filter('pascal_case')
+def to_pascal_case(snake_str):
+    return ''.join(word.capitalize() for word in snake_str.split('_'))
+
+@app.template_filter('pascal_case_spaces')
+def to_pascal_case_spaces(snake_str):
+    return ' '.join(word.capitalize() for word in snake_str.split('_'))
+
 
 
 if __name__  == "__main__":
@@ -94,8 +128,4 @@ if __name__  == "__main__":
     if(can_run_server):
         app.run(debug=True, port=8000)
 
-
-# @app.template_filter('reverse')
-# def reverse_filter(s):
-#     return s[::-1]
 

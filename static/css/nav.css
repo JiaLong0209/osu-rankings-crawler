@@ -1,0 +1,142 @@
+.navigation{
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    height: 55px;
+    background: var(--primary-opactiy);
+    position: relative;
+    top: 0;
+    /* position: fixed; */
+    border-bottom: var(--navigator-border-size) solid rgba(252, 148, 148, 0.178);
+}
+
+.navigation .logo{
+    height: 80%;
+    margin: auto 10px;
+}
+
+.navigation .logo img{
+    height: 100%;
+}
+
+
+.navigation .logo:hover{
+    transform: scale(1.2) rotate(1turn);
+    filter: brightness(120%);
+}
+
+.navigation ul{
+    display: flex;
+    text-align: center;
+    /* justify-content: space-between; */
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navigation ul li {
+    /* width: 100%; */
+    width: 9rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation ul li a {
+    display: block;
+    /* background: #f25; */
+    text-align: center;
+    color: #fff;
+    font-size: 1.3rem;
+    padding: var(--navigator-padding) 0;
+}
+
+.navigation ul li a:hover{
+    color: #333;
+    background: #fff;
+}
+
+
+.navigation ul li a:hover{
+    letter-spacing: 0.13rem;
+}
+
+.navigation ul li a::after{
+    content: '';
+    display: block;
+    margin: auto;
+    width: 0%;
+    background: #ffffff;
+    position: relative;
+    top: var(--navigator-padding);
+    height: 3px;
+    transition: 0.3s;
+}
+
+.navigation ul li a:hover::after{
+    background: var(--primary-opactiy);
+    width: 100%;
+}
+
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+    transition: 0;
+}
+
+.dropdown-content {
+    display: none !important;
+    transition: 0;
+    color: #333;
+    opacity: 0;
+    top: -150px;
+    width: 9rem;
+    position: absolute;
+    border: 0px solid var(--primary);
+    background-color: #fff;
+    box-shadow: 3px 3px 5px 2px var(--primary-opactiy);
+    padding: 5px;
+    z-index: 1;
+}
+
+.dropdown-content a{
+    font-size: 0.9rem !important;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex !important;
+    flex-direction: column;
+    transition: 0.1s;
+    color: #333;
+    top: 48px;
+    opacity: 1;
+}
+
+.dropdown:hover .dropdown-content:hover {
+    display: flex !important;
+}
+
+
+.dropdown:hover .dropdown-content a:hover{
+    background: var(--primary-opactiy);
+    color: #fff;
+}
+
+.dropdown:hover .dropdown-content a{
+    color: #333;
+}
+
+
+.navigation .title{
+    display: block;
+    position: relative;
+    font-size: 1.6rem;
+    margin: auto 0;
+    text-align: center;
+    color: #fff;
+}
+
+
+.navigation .title:hover{
+    letter-spacing: 0.3rem;
+    color: #fff;
+}

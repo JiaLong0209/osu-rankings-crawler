@@ -1,79 +1,78 @@
 {% extends "base.html" %}
 
-{% block title %}osu country rankings{% endblock %}
+{% block title %}Osu Country Rankings{% endblock %}
+
+{% block nav_title %}Osu Country Rankings{% endblock %}
 
 {% block page_content %}
 
-<div class="container">
+<!-- <a href="{{ url_for('chart') }}">To chart page.</a> -->
 
-    <h1>Hello Flask</h1>
-    <p>This is my first flask website.</p>
-    <a href="{{ url_for('chart') }}">To chart page.</a>
-
-    <div class="header">
-    </div>
-
-    <div class="rankings_table">
-        <table>
-            <thead>
-                <tr>
-                    {% for key in data.keys() %}
-                        <th>{{ key }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in range(data['ranking']|length) %}
-                    <tr>
-                        {% for key in data.keys() %}
-                            <td>{{ data[key][row] }}</td>
-                        {% endfor %}
-                    </tr>
+    <table id ="osu_rankings_table" class="rankings_table">
+      <!-- <caption>osu country rankings</caption> -->
+        <thead>
+            <tr>
+                {% for key in COUNTRY_RANKINGS_ENTRIES %}
+                <th>{{ key }}</th>
                 {% endfor %}
-            </tbody>
-        </table>
-<!-- 
-        <ul>
-            {% for key, values in data.items() %}
-                <li>{{ key }}: {{ values }}</li>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for row in range(data['ranking']|length) %}
+            <tr>
+                {% for key in COUNTRY_RANKINGS_ENTRIES %}
+                <td>{{ data[key][row] }}</td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </ul> -->
+        </tbody>
+        <tfoot>
 
-    </div>
-
+        </tfoot>
+    </table>
 
 </div>
 
 <script>
 
-    document.addEventListener('DOMContentLoaded', function() {
-        axios.get('/api/country_rankings')
-            .then( (response) => {
-                const data = response.data;
-                const tableBody = document.querySelector('.rankings_table tbody');
+
+        $(document).ready(function () {
+            $('.rankings_table').DataTable(dataTableConfig);
+        });
+
+
+    // document.addEventListener('DOMContentLoaded', function() {
+
+    //   let table = new DataTable('#osu_rankings_table')
+
+    //     axios.get('/api/country_rankings')
+    //         .then( (response) => {
+    //             const data = response.data;
+    //             const tableBody = document.querySelector('.rankings_table tbody');
                
-                for (let i in data){
-                    console.log(i, data[i])
-                }
+    //             for (let i in data){
+    //                 console.log(i, data[i])
+    //             }
             
-                for (let key of countryRankingsEntries){
-                        const row = document.createElement('tr');
+    //             for (let key of countryRankingsEntries){
+    //                     const row = document.createElement('tr');
 
-                        for(let value of data[key]){
-                            const cell = document.createElement('td');
-                            cell.textContent = value;
-                        }
+    //                     for(let value of data[key]){
+    //                         const cell = document.createElement('td');
+    //                         cell.textContent = value;
+    //                     }
 
-                        row.appendChild(cell);
+    //                     row.appendChild(cell);
 
-                    tableBody.appendChild(row);
+    //                 tableBody.appendChild(row);
 
-                }
-            })
-            .catch( (error) => {
-                console.error('Error fetching the data', error);
-            });
-    });
+    //             }
+    //         })
+    //         .catch( (error) => {
+    //             console.error('Error fetching the data', error);
+    //         });
+    // });
 
 </script>
 {% endblock %}

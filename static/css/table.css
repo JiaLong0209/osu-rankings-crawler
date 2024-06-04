@@ -1,0 +1,114 @@
+
+.rankings_table table{
+    min-width: 60%;
+    max-width: 90%;
+    margin: 20px;
+    margin-bottom: 50px;
+    padding: 10px;
+    border: var(--normal-border);
+    border-collapse: collapse;
+    /* border: 10px rgba(58, 10, 10, 0.24) solid; */
+    border-radius: 15px;
+    font-size: 1.2rem;
+    /* backdrop-filter: blur(1px); */
+}
+
+.rankings_table th, .rankings_table td {
+    border: var(--normal-border);
+    padding: 8px;
+    text-align: left;
+}
+
+.rankings_table th {
+    background-color: #ffdddd;
+}
+
+
+/* .rankings_table th:nth-child(2n) {
+    background-color: #ffdddd;
+} */
+
+
+.rankings_table table tr:first-child td{
+    text-align: center;
+    border-bottom: var(--normal-border);
+}
+
+.rankings_table table tr td:first-child{
+    text-align: center;
+    border: var(--normal-border);
+}
+
+.rankings_table caption{
+    font-size: 2rem;
+    color: rgba(80, 80, 80, 0.932);
+    text-shadow: 0 0 2px rgb(231, 181, 200);
+    margin: 10px;
+    transition: 0.1s;
+}
+
+.rankings_table caption:hover{
+    text-shadow: 1px 1px 2px 2px rgb(184, 65, 154) ;
+    letter-spacing: 0.25rem;
+}
+
+.rankings_table th,td{
+    /* border: 1px solid rgba(182, 139, 139, 0.555); */
+    min-width: 5rem;
+    padding: 10px 5px;
+}
+
+.rankings_table thead > tr > td{
+    background: rgba(133, 18, 37, var(--opacity));
+}
+
+.rankings_table 
+thead > tr > td:hover{
+    letter-spacing: 0.5rem;
+}
+
+.rankings_table tbody > tr > td:nth-child(1){
+    background: rgba(136, 53, 28, 0.096);
+    padding: 5px 15px;
+}
+
+.rankings_table tbody > tr > td:nth-child(1):hover{
+    background: var(--hover-bg);
+}
+
+.rankings_table tbody > tr > td:nth-child(1):hover .time{
+    color: #f7f7f7;
+}
+
+
+.rankings_table tbody > tr > td:nth-child(n+2){
+    font-size: 1.15rem;
+}
+
+.rankings_table tbody > tr:nth-child(2n){
+    /* background: rgba(249, 255, 232, var(--opacity)); */
+    /* background: rgba(249, 255, 232); */
+    color: var(--font-color);
+}
+
+.rankings_table tbody > tr:nth-child(2n+1){
+    /* background: rgba(243, 216, 198, var(--opacity)); */
+    /* background: rgba(243, 216, 198); */
+    color: var(--font-color);
+}
+
+.rankings_table tfoot{
+    height: 40px;
+}
+
+.rankings_table td:hover{
+    transition: 0.03s;
+    background: var(--hover-bg);
+    color: rgb(255, 255, 255);
+}
+
+.rankings_table td span{
+    display: block;
+    font-size: 0.8rem;
+}
+

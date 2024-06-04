@@ -9,7 +9,7 @@ CURRENT_MODE = "osu"
 CRAWLER_NAME = "country_rankings"
 
 START_PAGE = 1
-END_PAGE = 2
+END_PAGE = 5
 DATABASE = "osu.db"
 
 

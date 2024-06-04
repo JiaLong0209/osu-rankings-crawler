@@ -1,26 +1,113 @@
+:root {
+    /* Table */
+    --normal-border: 1px rgba(255, 192, 203, 0.849) solid;
+    /* --hover-bg: #a35; */
+
+    --opacity: 0.85;
+    --font-color: rgb(71, 71, 71);
+
+    /* --primary: rgb(129, 40, 40); */
+    /* --primary-opactiy: rgba(129, 40, 40, 0.87); */
+
+    --osu: #ff79b8;
+    --osu-light: #ff87c6;
+
+    --primary: #f062a1;
+    --primary-opactiy: #c7407dda;
+
+    --secondary: #f8ebeb;
+
+    --hover-bg: #d64c8a;
+    
+    
+    --navigator-border-size: 0px;
+    --navigator-padding: 8px;
+
+    --selected-bg: rgb(240, 90, 44);
+    --selected-color: #fff;
+}
+
 *{
-    padding: 0;
+
     margin: 0;
-    transition: 0.1s;
-}
-.rankings_table table {
-    width: 70%;
-    border-collapse: collapse;
-}
-
-.rankings_table th, td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu,
+        Cantarell, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333;
+    box-sizing: border-box;
+    text-align: center;
+    transition: 0.15s;
 }
 
-.rankings_table th {
-    background-color: #f2f2f2;
+/* 捲軸底色 */
+*::-webkit-scrollbar-track {
+    background-color: rgba(17, 16, 16, 0);
+    /* box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2); */
+
+}
+
+/* 捲軸寬度 */
+*::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* 捲軸本體顏色 */
+*::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
 }
 
 .container{
+    background: rgb(250, 241, 245);
+    /* background: radial-gradient(#0000, #0002 50%, #0005 70%,  #0a0a0a); */
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
-    background: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    backdrop-filter:brightness(100%);
+
+    /* background: linear-gradient(125deg, rgb(255, 255, 243), rgb(232, 222, 241), rgb(255, 252, 227)); */
+    background-position: 50% 0%;
+    background-image: url(/static/img/osu.png);
+    background-size: contain;
+    background-blend-mode: color-dodge;
+    /* color: rgba(255, 255, 255, 0.884); */
+
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    background: var(--selected-bg);
+    color: var(--selected-color);
+}
+
+::selection {
+    background: var(--selected-bg);
+    color: var(--selected-color);
+}
+
+body{
+    /* background: linear-gradient(125deg, rgb(255, 255, 243), rgb(232, 222, 241), rgb(255, 252, 227)); */
+    /* background-position: 0% 0%; */
+    /* background-image: url(/static/img/bg.png);
+    background-size: cover; */
+    color: rgba(255, 255, 255, 0.884);
+}
+
+a{
+    color: var(--primary)
+}
+
+a:hover{
+    color: var(--primary-opactiy);
+    cursor: pointer;
+}
+
+canvas{
+    max-width: 80%;
+    max-height: 90%;
 }

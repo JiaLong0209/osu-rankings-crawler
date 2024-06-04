@@ -12,7 +12,7 @@ import re
 class OsuCountrySpider(scrapy.Spider):
     name = "country_rankings"
     allowed_domains = ["osu.ppy.sh"]
-    pages = [i for i in range(START_PAGE, END_PAGE+1)] # page 1~2
+    pages = [i for i in range(START_PAGE, END_PAGE+1)] 
     start_urls = [f"https://osu.ppy.sh/rankings/{mode}/country?page={i}#scores" for i in pages for mode in GAME_MODES] 
     # https://osu.ppy.sh/rankings/osu/country?page=1#scores
 
