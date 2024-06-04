@@ -21,6 +21,7 @@
     
     
     --navigator-border-size: 0px;
+    --navigator-height: 55px;
     --navigator-padding: 8px;
 
     --selected-bg: rgb(240, 90, 44);

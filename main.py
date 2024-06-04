@@ -70,8 +70,10 @@ def table_pages(mode):
                            **CONSTANT_OBJ
                            )
 
+# Bar chart
 @app.route("/<mode>/<entry>")
-def chart_pages(mode, entry):
+def chart_pages(mode, entry, p_length = ""):
+    length = request.args.get("length", p_length if p_length else "50")
     return render_template(f"base_chart.html", 
                            data=get_country_rankings_json_data(mode, 500),
                            **locals(),
@@ -79,12 +81,13 @@ def chart_pages(mode, entry):
                            )
 
 
+# Scatter chart
 @app.route("/<mode>/scatter")
-def scatter_pages(mode, p_x = "", p_y = ""):
+def scatter_pages(mode, p_x = "", p_y = "", p_length = ""):
 
     x = request.args.get("x", p_x if p_x else "play_count")
     y = request.args.get("y", p_y if p_y else "avg_performance")
-    length = request.args.get("length", p_y if p_y else "100")
+    length = request.args.get("length", p_length if p_length else "100")
 
     print(f"x: {x}")
     print(f"y: {y}")

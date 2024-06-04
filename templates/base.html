@@ -37,7 +37,7 @@
 
                 {% for route_mode in GAME_MODES %}
                 <li class="dropdown">
-                    <a href="/{{route_mode}}">{{ route_mode | pascal_case}}</a>
+                    <a href="#">{{ route_mode | pascal_case}}</a>
                     <ul class="dropdown-content">
                         {% for i in range(PAGES['titles']|length) %}
                         <li><a href="/{{route_mode}}/{{ PAGES['routes'][i] }}">{{ PAGES['titles'][i] }}</a></li>

@@ -21,26 +21,35 @@ COUNTRY_RANKINGS_ENTRIES = [
 ]
 
 PAGES = {
+
     "titles": [
-        # 'Table',
+        'Table',
         'Active Users',
         'Play Count',
         'Avg Score',
         'Performance',
         'Avg Performance',
+
         'Scatter Chart1',
         'Scatter Chart2',
+        'Scatter Chart3',
+        'Scatter Chart4',
     ],
+
     "routes": [
-        # '',
+        '',
         'active_users',
         'play_count',
         'avg_score',
         'performance',
         'avg_performance',
+
         'scatter?x=play_count&y=avg_performance',
+        'scatter?x=play_count&y=avg_score',
         'scatter?x=active_users&y=avg_performance',
+        'scatter?x=active_users&y=avg_score',
     ]
+
 }
 
 CONSTANT_OBJ = {

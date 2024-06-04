@@ -53,9 +53,25 @@
                     options: {
                         scales: {
                             x: {
-                                type: 'linear',
-                                position: 'bottom'
+                                type: 'logarithmic',
+                                position: 'bottom',
+                                title: {
+                                    display: true,
+                                    text: "{{ x | pascal_case}}"
+                                },
+                            },
+                            y:{
+                                title: {
+                                    display: true,
+                                    text: "{{ y | pascal_case}}"                                },
+                                <!--ticks: {-->
+                                <!--    // Include a dollar sign in the ticks-->
+                                <!--    callback: function(value, index, ticks) {-->
+                                <!--        return '$' + value;-->
+                                <!--    }-->
+                                <!--}-->
                             }
+
                         }
                     }
                 });
