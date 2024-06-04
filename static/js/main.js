@@ -46,7 +46,7 @@ function getDataByValue(data, value, sortData = false) {
 }
 
 
-function getDataByValueScatter(data, valueX, valueY, sortData = false) {
+function getDataByValueScatter(data, valueX, valueY) {
      responseData = data;
      let arr_labels = responseData['country_name'];
      let arr_data_x = responseData[valueX];
@@ -54,16 +54,4 @@ function getDataByValueScatter(data, valueX, valueY, sortData = false) {
      
      let arr_data = arr_data_x.map( (v,i) => { return {"x": v, "y": arr_data_y[i]} })
      return {"labels": arr_labels, "data": arr_data}
-     
-
-     // let obj = arr_labels.map((v, i) => { return { "labels": v, "x": arr_data_x[i], "y": arr_data_y[i]} })
-     // if (sortData) obj = obj.sort((a, b) => { return b.data - a.data });
-
-     // arr_labels = obj.reduce((acc, cur) => { return [...acc, cur.labels] }, []);
-     // arr_data_x = obj.reduce((acc, cur) => { return [...acc, cur.x] }, []);
-     // arr_data_y = obj.reduce((acc, cur) => { return [...acc, cur.y] }, []);
-
-     // console.log(obj);
-
-     // return {"labels": arr_labels, "data" : {"x": arr_data_x, "y": arr_data_y}}
 }

@@ -14,7 +14,6 @@ class OsuCountrySpider(scrapy.Spider):
     allowed_domains = ["osu.ppy.sh"]
     pages = [i for i in range(START_PAGE, END_PAGE+1)] 
     start_urls = [f"https://osu.ppy.sh/rankings/{mode}/country?page={i}#scores" for i in pages for mode in GAME_MODES] 
-    # https://osu.ppy.sh/rankings/osu/country?page=1#scores
 
 
     def parse(self, response):
@@ -25,7 +24,7 @@ class OsuCountrySpider(scrapy.Spider):
         item['country_name'] = str_preprocess_in_list(sel.xpath('//*[@id="scores"]/div/table/tbody//td[2]/div/a/span[2]/text()').extract())
         item['active_users'] = str_preprocess_in_list(sel.xpath('//*[@id="scores"]/div/table/tbody//td[3]/text()').extract())
 
-        # get data-orig-title attribute => @title
+        # Get data-orig-title attribute => @title
         item['play_count'] = str_preprocess_in_list(sel.xpath('//*[@id="scores"]/div/table/tbody//td[4]/span/@title').extract())
         item['ranked_score'] = str_preprocess_in_list(sel.xpath('//*[@id="scores"]/div/table/tbody//td[5]/span/@title').extract())
         item['avg_score'] = str_preprocess_in_list(sel.xpath('//*[@id="scores"]/div/table/tbody//td[6]/span/@title').extract())

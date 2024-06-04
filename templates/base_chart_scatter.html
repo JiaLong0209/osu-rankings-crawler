@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block title %}{{ mode | pascal_case}} Country Rankings - {{ x | pascal_case_spaces}} and {{y | pascal_case_spaces}}{% endblock %}
 
 {% block nav_title %}{{ mode | pascal_case}} Country Rankings - {{ x | pascal_case_spaces}} and {{y | pascal_case_spaces}}{% endblock %}
@@ -23,7 +22,6 @@
                 const ctx = document.getElementById('myChart');
 
                 new Chart(ctx, {
-                    // type: 'bar',
                     type: 'scatter',
                     data: {
                         labels: sorted_data['labels'],

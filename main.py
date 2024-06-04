@@ -6,19 +6,13 @@ from config import *
 from flask import Flask, render_template, jsonify, request
 from flask import g
 
-# from flask_script import Manager
-
-# print(f'Name: {__name__}')
-# print(f"{GAME_MODES}")
-# print(SCHEMAS)
-
 app = Flask(__name__, static_url_path='/static')
 
 DATABASE = "osu.db"
 reset_db = False
 can_run_server = True
 
-# table schema
+# Table schema
 prefix_path = "schema/"
 table_name = "osu_country_rankings"
 
@@ -125,6 +119,7 @@ def get_country_rankings_data(p_mode = "", p_length = ""):
 
 def get_country_rankings_json_data(p_mode = "", p_length = ""):
     res = get_country_rankings_data(p_mode, p_length)
+    print(f"Res: {res}")
     data = res.get_json()
     return data
 
@@ -143,5 +138,6 @@ if __name__  == "__main__":
     init()
     if(can_run_server):
         app.run(debug=True, port=8000)
+        # app.run( host='0.0.0.0',port=8000)
 
 

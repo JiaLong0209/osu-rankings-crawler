@@ -8,7 +8,6 @@ os.chdir('osu_crawler/')
 
 from config import * 
 
-# command = ["scrapy", "crawl", "country_rankings"]
 command = f"scrapy crawl {CRAWLER_NAME}"
 
 for mode in GAME_MODES:
@@ -18,7 +17,6 @@ for mode in GAME_MODES:
         print(f"current mode: {CURRENT_MODE}")
 
         os.system(command) 
-        # subprocess.run(command, check=True)
 
         print("Command executed successfully")
 
