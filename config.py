@@ -2,6 +2,8 @@ GAME_MODES = ["osu", "taiko", "mania", "fruits"]
 
 SCHEMAS = { mode : f"{mode}_schema.sql" for mode in GAME_MODES}
 
+SCHEMA_LIST = [SCHEMAS[mode] for mode in GAME_MODES]
+
 TABLES = { mode : f"{mode}_country_rankings" for mode in GAME_MODES}
 
 CURRENT_MODE = "osu"

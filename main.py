@@ -40,9 +40,10 @@ def close_connection(exception):
 def init_db():
     with app.app_context():
         db = get_db()
-        with app.open_resource(taiko_schema, mode='r') as f:
-            db.cursor().executescript(f.read())
-        db.commit()
+        for schema in SCHEMA_LIST:
+            with app.open_resource(schema, mode='r') as f:
+                db.cursor().executescript(f.read())
+            db.commit()
 
 def remove_db():
     if os.path.isfile(DATABASE):
@@ -75,6 +76,15 @@ def chart_pages(mode, entry):
                            data=get_country_rankings_json_data(mode, 500),
                            COUNTRY_RANKINGS_ENTRIES=COUNTRY_RANKINGS_ENTRIES,
                            entry=entry)
+
+@app.route("/<mode>/scatter")
+def scatter_pages(mode):
+    return render_template(f"base_chart_scatter.html", mode = mode,
+                           data=get_country_rankings_json_data(mode, 500),
+                           x="play_count",
+                           y="avg_performance",
+                           COUNTRY_RANKINGS_ENTRIES=COUNTRY_RANKINGS_ENTRIES)
+                           
 
 
 

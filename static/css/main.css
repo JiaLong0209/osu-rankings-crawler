@@ -39,6 +39,8 @@
     box-sizing: border-box;
     text-align: center;
     transition: 0.15s;
+    cursor: url(/static/img/cursor01.cur),auto !important;
+
 }
 
 /* 捲軸底色 */

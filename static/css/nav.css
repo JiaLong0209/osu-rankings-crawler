@@ -1,6 +1,6 @@
 .navigation{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 100vw;
     height: 55px;
     background: var(--primary-opactiy);
@@ -131,7 +131,7 @@
     position: relative;
     font-size: 1.6rem;
     margin: auto 0;
-    text-align: center;
+    text-align: left;
     color: #fff;
 }
 

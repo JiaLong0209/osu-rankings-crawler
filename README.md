@@ -3,10 +3,15 @@
 This is an osu rakings crawler.
 
 
+
+
 ## Run
 
 
 ```bash
+# Install packages 
+pip install -r requirements.txt
+
 # Remove previous database and create new one.
 python init_db.py
 
