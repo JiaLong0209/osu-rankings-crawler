@@ -32,87 +32,21 @@
                 </a>
             </div>
             <div class="title">{% block nav_title%}{% endblock nav_title%}</div>
+
             <ul>
 
-                <!--{% for mode in GAME_MODES %}-->
-                <!---->
-                <!--<li class="dropdown">-->
-                <!---->
-                <!--  <a href="/{{mode}}">{{ mode | pascal_case}}</a>-->
-                <!--    <ul class="dropdown-content">-->
-                <!--        <li><a href="/osu">Table</a></li>-->
-                <!--        <li><a href="/osu/active_users">Active Users</a></li>-->
-                <!--        <li><a href="/osu/play_count">Play Count</a></li>-->
-                <!--        <li><a href="/osu/avg_score">Avg Score</a></li>-->
-                <!--        <li><a href="/osu/performance">Performance</a></li>-->
-                <!--        <li><a href="/osu/avg_performance">Avg Performance</a></li>-->
-                <!--        <li><a href="/osu/scatter">Scatter Chart1</a></li>-->
-                <!--        <li><a href="/osu/scatter?x=active_users">Scatter Chart2</a></li>-->
-                <!--    </ul>-->
-                <!---->
-                <!--</li>-->
-                <!---->
-                <!--{% endfor %}-->
-                <!---->
-
+                {% for route_mode in GAME_MODES %}
                 <li class="dropdown">
-                    <a href="/osu">Osu</a>
+                    <a href="/{{route_mode}}">{{ route_mode | pascal_case}}</a>
                     <ul class="dropdown-content">
-                        <li><a href="/osu">Table</a></li>
-                        <li><a href="/osu/active_users">Active Users</a></li>
-                        <li><a href="/osu/play_count">Play Count</a></li>
-                        <li><a href="/osu/avg_score">Avg Score</a></li>
-                        <li><a href="/osu/performance">Performance</a></li>
-                        <li><a href="/osu/avg_performance">Avg Performance</a></li>
-                        <li><a href="/osu/scatter">Scatter Chart1</a></li>
-                        <li><a href="/osu/scatter?x=active_users">Scatter Chart2</a></li>
+                        {% for i in range(PAGES['titles']|length) %}
+                        <li><a href="/{{route_mode}}/{{ PAGES['routes'][i] }}">{{ PAGES['titles'][i] }}</a></li>
+                        {% endfor %}
                     </ul>
                 </li>
-                
-
-                <li class="dropdown">
-                    <a href="/taiko">Taiko</a>
-                    <ul class="dropdown-content">
-                        <li><a href="/taiko">Table</a></li>
-                        <li><a href="/taiko/active_users">Active Users</a></li>
-                        <li><a href="/taiko/play_count">Play Count</a></li>
-                        <li><a href="/taiko/avg_score">Avg Score</a></li>
-                        <li><a href="/taiko/performance">Performance</a></li>
-                        <li><a href="/taiko/avg_performance">Avg Performance</a></li>
-                        <li><a href="/taiko/scatter">Scatter Chart</a></li>
-                        <li><a href="/taiko/scatter?x=active_users">Scatter Chart2</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="/mania">Mania</a>
-                    <ul class="dropdown-content">
-                        <li><a href="/mania">Table</a></li>
-                        <li><a href="/mania/active_users">Active Users</a></li>
-                        <li><a href="/mania/play_count">Play Count</a></li>
-                        <li><a href="/mania/avg_score">Avg Score</a></li>
-                        <li><a href="/mania/performance">Performance</a></li>
-                        <li><a href="/mania/avg_performance">Avg Performance</a></li>
-                        <li><a href="/mania/scatter">Scatter Chart</a></li>
-                        <li><a href="/mania/scatter?x=active_users">Scatter Chart2</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="fruits">Catch</a>
-                    <ul class="dropdown-content">
-                        <li><a href="/fruits">Table</a></li>
-                        <li><a href="/fruits/active_users">Active Users</a></li>
-                        <li><a href="/fruits/play_count">Play Count</a></li>
-                        <li><a href="/fruits/avg_score">Avg Score</a></li>
-                        <li><a href="/fruits/performance">Performance</a></li>
-                        <li><a href="/fruits/avg_performance">Avg Performance</a></li>
-                        <li><a href="/fruits/scatter">Scatter Chart</a></li>
-                        <li><a href="/fruits/scatter?x=active_users">Scatter Chart2</a></li>
-                    </ul>
-
-                </li>
+                {% endfor %}
             </ul>
+
         </nav>
 
         {% block page_content %}

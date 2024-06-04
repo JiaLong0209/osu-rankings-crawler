@@ -52,24 +52,28 @@ def init():
 @app.route("/")
 def index():
     return render_template("index.html", data=get_country_rankings_json_data('taiko', 500),
-                           COUNTRY_RANKINGS_ENTRIES=COUNTRY_RANKINGS_ENTRIES)
+                           **CONSTANT_OBJ
+                           )
 
 @app.route("/chart")
 def chart():
     return render_template("chart.html")
 
-@app.route("/<mode>")
+@app.route("/<mode>/")
 def table_pages(mode):
     return render_template(f"base_table.html", mode = mode,
                            data=get_country_rankings_json_data(mode, 500),
-                           COUNTRY_RANKINGS_ENTRIES=COUNTRY_RANKINGS_ENTRIES)
+                           **CONSTANT_OBJ
+                           )
 
 @app.route("/<mode>/<entry>")
 def chart_pages(mode, entry):
     return render_template(f"base_chart.html", mode = mode,
                            data=get_country_rankings_json_data(mode, 500),
-                           COUNTRY_RANKINGS_ENTRIES=COUNTRY_RANKINGS_ENTRIES,
-                           entry=entry)
+                           entry=entry,
+                           **CONSTANT_OBJ
+                           )
+
 
 @app.route("/<mode>/scatter")
 def scatter_pages(mode, p_x = "", p_y = ""):
@@ -83,7 +87,8 @@ def scatter_pages(mode, p_x = "", p_y = ""):
                            data=get_country_rankings_json_data(mode, 500),
                            x=x,
                            y=y,
-                           COUNTRY_RANKINGS_ENTRIES=COUNTRY_RANKINGS_ENTRIES)
+                           **CONSTANT_OBJ
+                           )
                            
 
 
@@ -113,13 +118,15 @@ def get_country_rankings_data(p_mode = "", p_length = ""):
     data = cursor.execute(f"SELECT * FROM {table_name} AS r").fetchall()
     t_data = [i for i in zip(*data)]
     dict_data = {key: list(t_data[i])[:length] for i, key in enumerate(COUNTRY_RANKINGS_ENTRIES)}
+
     json_data = jsonify(dict_data)
 
-    return json_data
+    print(f"\n\nJSON: {json_data}")
+
+    return (json_data, 200)
 
 def get_country_rankings_json_data(p_mode = "", p_length = ""):
-    res = get_country_rankings_data(p_mode, p_length)
-    print(f"Res: {res}")
+    res, status = get_country_rankings_data(p_mode, p_length)
     data = res.get_json()
     return data
 
