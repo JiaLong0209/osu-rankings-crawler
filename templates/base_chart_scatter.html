@@ -12,7 +12,7 @@
 
     let responseData = {}
     document.addEventListener('DOMContentLoaded', function () {
-        axios.get('/api/country_rankings?mode={{ mode }}')
+        axios.get('/api/country_rankings?mode={{ mode }}&length={{ length }}')
             .then((response) => {
 
                 let sorted_data = getDataByValueScatter(response.data, "{{x}}", "{{y}}")

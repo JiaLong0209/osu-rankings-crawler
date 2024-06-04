@@ -1,6 +1,7 @@
 import os
 import sqlite3
 import json
+import sys
 from config import * 
 
 from flask import Flask, render_template, jsonify, request
@@ -11,6 +12,7 @@ app = Flask(__name__, static_url_path='/static')
 DATABASE = "osu.db"
 reset_db = False
 can_run_server = True
+is_debug_mode = False
 
 # Table schema
 prefix_path = "schema/"
@@ -51,7 +53,8 @@ def init():
 # Router
 @app.route("/")
 def index():
-    return render_template("index.html", data=get_country_rankings_json_data('taiko', 500),
+    return render_template("index.html", data=get_country_rankings_json_data('osu', 500),
+                           **locals(),
                            **CONSTANT_OBJ
                            )
 
@@ -61,16 +64,17 @@ def chart():
 
 @app.route("/<mode>/")
 def table_pages(mode):
-    return render_template(f"base_table.html", mode = mode,
+    return render_template(f"base_table.html",
                            data=get_country_rankings_json_data(mode, 500),
+                           **locals(),
                            **CONSTANT_OBJ
                            )
 
 @app.route("/<mode>/<entry>")
 def chart_pages(mode, entry):
-    return render_template(f"base_chart.html", mode = mode,
+    return render_template(f"base_chart.html", 
                            data=get_country_rankings_json_data(mode, 500),
-                           entry=entry,
+                           **locals(),
                            **CONSTANT_OBJ
                            )
 
@@ -80,13 +84,15 @@ def scatter_pages(mode, p_x = "", p_y = ""):
 
     x = request.args.get("x", p_x if p_x else "play_count")
     y = request.args.get("y", p_y if p_y else "avg_performance")
+    length = request.args.get("length", p_y if p_y else "100")
+
     print(f"x: {x}")
     print(f"y: {y}")
+    print(f"Locals: {locals()}")
 
-    return render_template(f"base_chart_scatter.html", mode = mode,
+    return render_template(f"base_chart_scatter.html",
                            data=get_country_rankings_json_data(mode, 500),
-                           x=x,
-                           y=y,
+                           **locals(),
                            **CONSTANT_OBJ
                            )
                            
@@ -118,10 +124,7 @@ def get_country_rankings_data(p_mode = "", p_length = ""):
     data = cursor.execute(f"SELECT * FROM {table_name} AS r").fetchall()
     t_data = [i for i in zip(*data)]
     dict_data = {key: list(t_data[i])[:length] for i, key in enumerate(COUNTRY_RANKINGS_ENTRIES)}
-
     json_data = jsonify(dict_data)
-
-    print(f"\n\nJSON: {json_data}")
 
     return (json_data, 200)
 
@@ -137,8 +140,17 @@ def to_pascal_case(snake_str):
 
 if __name__  == "__main__":
     init()
+
+
+    for arg in sys.argv:
+        if arg == '--debug':
+            is_debug_mode = True
+
     if(can_run_server):
-        app.run(debug=True, port=8000)
-        # app.run( host='0.0.0.0',port=8000)
+        if(is_debug_mode):
+            app.run(debug=True, port=8000)
+        else:
+            app.run(host='0.0.0.0',port=8000)
+        
 
 
