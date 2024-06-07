@@ -1,5 +1,6 @@
 :root{
     --navigation-height: 2.9rem;
+    --dropdown-content-border-radius: 15px;
 }
 
 .navigation{
@@ -61,7 +62,7 @@
 
 
 .navigation ul li a:hover{
-    letter-spacing: 0.13rem;
+    letter-spacing: 0.10rem;
 }
 
 .navigation ul li a::after{
@@ -99,7 +100,9 @@
 .dropdown {
     display: inline-block;
     position: relative;
+    top: 0;
     transition: 0;
+    height: var(--navigation-height);
 }
 
 .dropdown-content {
@@ -122,8 +125,9 @@
 }
 
 .dropdown-content li:last-child a{
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    padding-bottom: 10px;
+    border-bottom-right-radius: var(--dropdown-content-border-radius);
+    border-bottom-left-radius: var(--dropdown-content-border-radius);
 }
 
 .dropdown-content li:last-child a:after{
@@ -138,8 +142,8 @@
     /*top: 45px;*/
     top: var(--navigation-height);
     opacity: 1;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: var(--dropdown-content-border-radius);
+    border-bottom-left-radius: var(--dropdown-content-border-radius);
 }
 
 .dropdown:hover .dropdown-content:hover {
