@@ -13,7 +13,7 @@
         <thead>
             <tr>
                 {% for key in COUNTRY_RANKINGS_ENTRIES %}
-                <th>{{ key }}</th>
+                <th>{{ key | pascal_case }}</th>
                 {% endfor %}
             </tr>
         </thead>
@@ -22,7 +22,11 @@
             {% for row in range(data['ranking']|length) %}
             <tr>
                 {% for key in COUNTRY_RANKINGS_ENTRIES %}
-                <td>{{ data[key][row] }}</td>
+                    {% if key == 'country_name' %}
+                    <td>{{ data[key][row] | pascal_to_spaces }}</td>
+                    {% else %}
+                    <td>{{ data[key][row] | format_number }}</td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             {% endfor %}

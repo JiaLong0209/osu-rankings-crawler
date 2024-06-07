@@ -2,6 +2,7 @@ import os
 import sqlite3
 import json
 import sys
+import re
 from config import * 
 
 from flask import Flask, render_template, jsonify, request
@@ -140,6 +141,19 @@ def get_country_rankings_json_data(p_mode = "", p_length = ""):
 @app.template_filter('pascal_case')
 def to_pascal_case(snake_str):
     return f"{' ' if len(snake_str.split('_')) > 1 else '' }".join(word.capitalize() for word in snake_str.split('_'))
+
+
+@app.template_filter('pascal_to_spaces')
+def pascal_to_spaces(pascal_str):
+    # Use regular expression to add space before each capital letter, except the first one
+    spaced_str = re.sub(r'(?<!^)(?=[A-Z])', ' ', pascal_str)
+    return spaced_str
+
+
+@app.template_filter('format_number')
+def format_number_with_comma(number):
+    return f"{number:,}"
+
 
 if __name__  == "__main__":
     init()
