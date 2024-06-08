@@ -30,6 +30,8 @@
     --navigator-height: 55px;
     --navigator-padding: 8px;
 
+    --dropdown-content-hover-transition: 0.25s;
+
     --selected-bg: rgb(240, 90, 44);
     --selected-color: #fff;
 }

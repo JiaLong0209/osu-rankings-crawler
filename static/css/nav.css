@@ -1,5 +1,5 @@
 :root{
-    --navigation-height: 2.82rem;
+    --navigation-height: 2.79rem;
     --dropdown-content-border-radius: 15px;
 }
 
@@ -80,8 +80,8 @@
     background: #ffffff;
     position: relative;
     top: var(--navigator-padding);
-    height: 3px;
-    transition: 0.3s;
+    height: 2px;
+    transition: 0.4s;
 }
 
 .navigation ul li a:hover::after,
@@ -106,6 +106,7 @@
 
 .dropdown {
     display: inline-block;
+    overflow: hidden;
     position: relative;
     top: 0;
     transition: 0;
@@ -117,6 +118,15 @@
 } */
 
 
+.dropdown:hover{
+    overflow: visible;
+}
+
+
+.dropdown:hover > a{ 
+    letter-spacing: var(--hover-letter-spacing);
+}
+
 .dropdown:hover .dropdown-content a:hover{
     background: var(--primary-opactiy);
     color: var(--font-color-white);
@@ -127,36 +137,39 @@
 }
 
 .dropdown-content {
-    display: none !important;
-    transition: 0;
+    /*display: none !important;*/
     color: var(--font-color);
     opacity: 0;
     min-width: 9rem;
     position: absolute;
     border: 0px solid var(--primary);
     background-color: var(--font-color-white);
-    box-shadow: 0px 0px 10px 0px var(--primary-opactiy);
+    box-shadow: 0px 3px 10px 0px var(--primary-opactiy);
     z-index: 1;
     top: var(--navigation-height);
 }
 
+
 .dropdown-content a{
     padding: 0;
     font-size: 0.9rem !important;
-
+    transition: 0.1s;
 }
+
 
 .dropdown-content li:last-child a{
     padding-bottom: 10px;
     border-bottom-right-radius: var(--dropdown-content-border-radius);
     border-bottom-left-radius: var(--dropdown-content-border-radius);
-} .dropdown-content li:last-child a:after{
+} 
+
+.dropdown-content li:last-child a:after{
     display: none;
 }
 
 .dropdown:hover .dropdown-content {
     display: block !important;
-    transition: 0.1s;
+    transition: var(--dropdown-content-hover-transition);
     color: var(--font-color);
     opacity: 1;
     border-bottom-right-radius: var(--dropdown-content-border-radius);
