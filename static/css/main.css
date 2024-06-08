@@ -8,6 +8,8 @@
 
     --opacity: 0.85;
     --font-color: rgb(71, 71, 71);
+    --font-color-white: #fff;
+    --hover-letter-spacing: 0.13rem;
 
     /* --primary: rgb(129, 40, 40); */
     /* --primary-opactiy: rgba(129, 40, 40, 0.87); */
@@ -23,6 +25,7 @@
     --hover-bg: #d64c8a;
     
     
+    --navigator-li-width: 10rem;
     --navigator-border-size: 0px;
     --navigator-height: 55px;
     --navigator-padding: 8px;
