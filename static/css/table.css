@@ -9,7 +9,8 @@
     /* border: 10px rgba(58, 10, 10, 0.24) solid; */
     border-radius: 15px;
     font-size: 1.2rem;
-    /* backdrop-filter: blur(1px); */
+    /*box-shadow: 0 0 3px var(--primary);*/
+    /*backdrop-filter: blur(1px); */
 }
 
 .rankings_table th, .rankings_table td {
@@ -20,8 +21,14 @@
 
 .rankings_table th {
     background-color: #ffdddd;
+    font-size: 1rem;
 }
 
+
+.rankings_table th:hover {
+    background-color: var(--secondary);
+    color: var(--font-color-white) !important;
+}
 
 /* .rankings_table tr:first-child td{
     text-align: center;
@@ -96,7 +103,7 @@ thead > tr > td:hover{
 }
 
 .rankings_table td:hover{
-    transition: 0.03s;
+    transition: 0.0s;
     background: var(--hover-bg);
     color: rgb(255, 255, 255);
 }
@@ -110,18 +117,23 @@ thead > tr > td:hover{
 
 .dt-paging .dt-paging-button{
     background: #fff0 !important;
+    border: 10px solid var(--primary-opacity) !important;
 }
 
 .dt-paging .dt-paging-button:hover {
     background: var(--osu) !important;
     color: var(--font-color-white) !important;
-    border: 1px solid var(--primary-opacity) !important;
 }
 
 .dt-paging-button.current{
     background: var(--osu-light) !important;
     color: var(--font-color-white) !important;
 }
+
+.dt-orderable-asc:hover ,.dt-orderable-desc:hover{
+    outline: 2px  solid var(--primary) !important;
+}
+
 
 /*.dt-paging-button.current:hover{*/
 /*    border: 2px solid var(--primary-opacity) !important;*/
