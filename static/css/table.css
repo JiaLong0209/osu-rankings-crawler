@@ -106,3 +106,25 @@ thead > tr > td:hover{
     font-size: 0.8rem;
 }
 
+/*Overwrite dataTable style*/
+
+.dt-paging .dt-paging-button{
+    background: #fff0 !important;
+}
+
+.dt-paging .dt-paging-button:hover {
+    background: var(--osu) !important;
+    color: var(--font-color-white) !important;
+    border: 1px solid var(--primary-opacity) !important;
+}
+
+.dt-paging-button.current{
+    background: var(--osu-light) !important;
+    color: var(--font-color-white) !important;
+}
+
+/*.dt-paging-button.current:hover{*/
+/*    border: 2px solid var(--primary-opacity) !important;*/
+/*}*/
+/**/
+
