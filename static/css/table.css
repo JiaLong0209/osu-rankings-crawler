@@ -1,7 +1,6 @@
 
-.rankings_table table{
-    min-width: 60%;
-    max-width: 90%;
+.rankings_table{
+    width: 50%;
     margin: 20px;
     margin-bottom: 50px;
     padding: 10px;
@@ -24,12 +23,12 @@
 }
 
 
-.rankings_table table tr:first-child td{
+/* .rankings_table tr:first-child td{
     text-align: center;
     border-bottom: var(--normal-border);
-}
+} */
 
-.rankings_table table tr td:first-child{
+.rankings_table tr td:first-child{
     text-align: center;
     border: var(--normal-border);
 }
