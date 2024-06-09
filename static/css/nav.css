@@ -12,6 +12,7 @@
     background: var(--primary-opactiy);
     position: relative;
     top: 0;
+    margin-bottom: 20px;
     /* position: fixed; */
     /* border-bottom: var(--navigator-border-size) solid rgba(252, 148, 148, 0.178); */
 }
@@ -19,6 +20,7 @@
 .navigation .logo{
     height: 80%;
     margin: auto 10px;
+    transition: 0.5s;
 }
 
 .navigation .logo img{
@@ -27,10 +29,19 @@
 
 
 .navigation .logo:hover{
-    transform: scale(1.2) rotate(1turn);
+    transition: 0s;
+    transform: scale(1.1);
     filter: brightness(120%);
     cursor: pointer;
 }
+
+.navigation .logo:active{
+    transition: 0.1s;
+    transform: scale(1.2);
+    filter: brightness(140%);
+    cursor: pointer;
+}
+
 
 .navigation ul{
     display: flex;
@@ -60,7 +71,6 @@
     color: var(--font-color);
     background: #fff;
     letter-spacing: var(--hover-letter-spacing);
-    /*letter-spacing: 1rem;*/
 }
 
 .dropdown:hover a{
@@ -105,7 +115,7 @@
     overflow: hidden;
     position: relative;
     top: 0;
-    transition: 0;
+    transition: var(--dropdown-content-hover-transition);
     /* height: var(--navigation-height); */
 }
 
@@ -127,6 +137,12 @@
 .dropdown:hover .dropdown-content a:hover{
     background: var(--primary-opactiy);
     color: var(--font-color-white);
+}
+
+.dropdown:hover .dropdown-content a:active{
+    transition: 0s;
+    background: var(--osu-light);
+    color: var(--font-color);
 }
 
 .dropdown:hover .dropdown-content a{
